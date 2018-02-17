@@ -32,7 +32,7 @@ void ParseTree_destroy(ParseTree *tree_ptr);
 
 ParseTree_Node *ParseTree_Node_new(int symbol, Token *tkn_ptr);
 
-void ParseTree_Node_destroy(ParseTree_Node *tree_ptr);
+void ParseTree_Node_destroy(ParseTree_Node *node_ptr);
 
 
 //////////
