@@ -67,5 +67,11 @@ void ParseTree_Node_move_inorder(ParseTree_Node *node_ptr){
 //////////////////////
 
 ParseTree_Node *ParseTree_Node_add_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr){
+	ParseTree_Node *new_node_ptr = ParseTree_Node_new(symbol, tkn_ptr);
 
+	new_node_ptr->parent = node_ptr;
+	new_node_ptr->sibling = node_ptr->child;
+	node_ptr->child = new_node_ptr;
+
+	return new_node_ptr;
 }
