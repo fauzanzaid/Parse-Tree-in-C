@@ -39,7 +39,7 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr);
 // Move //
 //////////
 
-void ParseTree_Node_move_inorder(ParseTree_Node *node_ptr);
+ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr);
 
 
 //////////////////////

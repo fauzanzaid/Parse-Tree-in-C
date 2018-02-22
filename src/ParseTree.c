@@ -43,12 +43,14 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr){
 		ParseTree_Node *child = current->child;
 		while(child){
 			LinkedList_push(stack, child);
+			child = child->sibling;
 		}
 
-		Token_destroy(current->tkn_ptr);
+		if(current->tkn_ptr != NULL){
+			Token_destroy(current->tkn_ptr);
+		}
 		free(current);
 	}
-
 	LinkedList_destroy(stack);
 }
 
@@ -57,8 +59,35 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr){
 // Move //
 //////////
 
-void ParseTree_Node_move_inorder(ParseTree_Node *node_ptr){
+ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr){
+	if(node_ptr->child != NULL){
+		// Move to child if it exists
+		return node_ptr->child;
+	}
+	else if(node_ptr->sibling != NULL){
+		// Else, move to sibling if it exists
+		return node_ptr->sibling;
+	}
+	else{
+		// Else, move to the sibling of the first ancestor who has one
+		ParseTree_Node *current = node_ptr;
 
+		while(1){
+			if(current->parent == NULL){
+				// No such ancestor exists, given node was the rightmost
+				return NULL;
+			}
+			else if(current->parent->sibling == NULL){
+				// Immediate parent does not have a sibling, move to next
+				// parent
+				current = current->parent;
+			}
+			else{
+				// Immediate parent has a sibling
+				return current->parent->sibling;
+			}
+		}
+	}
 }
 
 
