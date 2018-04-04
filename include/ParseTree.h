@@ -16,6 +16,7 @@ struct ParseTree_Node{
 	ParseTree_Node *sibling;
 	ParseTree_Node *child;
 
+	int rule_num;
 	int symbol;
 	Token *tkn_ptr;
 };
