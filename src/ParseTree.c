@@ -28,6 +28,7 @@ ParseTree_Node *ParseTree_Node_new(int symbol, Token *tkn_ptr){
 	node_ptr->rule_num = -1;
 	node_ptr->symbol = symbol;
 	node_ptr->tkn_ptr = tkn_ptr;
+	node_ptr->atr_ptr = ParseTree_Node_Attr_new();
 
 	return node_ptr;
 }
@@ -50,6 +51,9 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr){
 		if(current->tkn_ptr != NULL){
 			Token_destroy(current->tkn_ptr);
 		}
+
+		ParseTree_Node_Attr_destroy(current->atr_ptr);
+
 		free(current);
 	}
 	LinkedList_destroy(stack);
