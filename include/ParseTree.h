@@ -23,7 +23,7 @@ struct ParseTree_Node{
 	ParseTree_Node *child;
 
 	int rule_num;
-	int child_index;
+	int symbol_index;
 	int symbol;
 	Token *tkn_ptr;
 	ParseTree_Node_Attr* atr_ptr;
@@ -64,6 +64,8 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr);
 
 ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr);
 
+ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
+
 
 //////////////////////
 // Modify structure //
@@ -71,5 +73,6 @@ ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr);
 
 ParseTree_Node *ParseTree_Node_add_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr);
 
+int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
 #endif
