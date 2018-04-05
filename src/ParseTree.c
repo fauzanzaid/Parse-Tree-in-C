@@ -26,6 +26,8 @@ ParseTree_Node *ParseTree_Node_new(int symbol, Token *tkn_ptr){
 	node_ptr->child = NULL;
 
 	node_ptr->rule_num = -1;
+	node_ptr->child_index = -1;
+
 	node_ptr->symbol = symbol;
 	node_ptr->tkn_ptr = tkn_ptr;
 	node_ptr->atr_ptr = ParseTree_Node_Attr_new();

@@ -23,6 +23,7 @@ struct ParseTree_Node{
 	ParseTree_Node *child;
 
 	int rule_num;
+	int child_index;
 	int symbol;
 	Token *tkn_ptr;
 	ParseTree_Node_Attr* atr_ptr;
