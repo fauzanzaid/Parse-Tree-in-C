@@ -114,7 +114,7 @@ ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_pt
 // Modify structure //
 //////////////////////
 
-ParseTree_Node *ParseTree_Node_add_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr){
+ParseTree_Node *ParseTree_Node_create_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr){
 	ParseTree_Node *new_node_ptr = ParseTree_Node_new(symbol, tkn_ptr);
 
 	new_node_ptr->parent = node_ptr;
@@ -122,6 +122,38 @@ ParseTree_Node *ParseTree_Node_add_child_left_end(ParseTree_Node *node_ptr, int 
 	node_ptr->child = new_node_ptr;
 
 	return new_node_ptr;
+}
+
+ParseTree_Node *ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr){
+	child_ptr->parent = node_ptr;
+	child_ptr->sibling = node_ptr->child;
+	node_ptr->child = child_ptr;
+
+	return child_ptr;
+}
+
+ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index){
+	ParseTree_Node *child_cur = node_ptr->child;
+	ParseTree_Node *child_prev = NULL;
+
+	while(child_cur != NULL){
+		if(child_cur->symbol_index == symbol_index){
+			if(child_prev == NULL)
+				node_ptr->child = child_cur->sibling;
+			else
+				child_prev->sibling = child_cur->sibling;
+
+			child_cur->parent = NULL;
+			child_cur->sibling = NULL;
+
+			return child_cur;
+		}
+
+		child_prev = child_cur;
+		child_cur = child_cur->sibling;
+	}
+
+	return NULL;
 }
 
 int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index){

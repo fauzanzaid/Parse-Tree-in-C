@@ -71,7 +71,11 @@ ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_pt
 // Modify structure //
 //////////////////////
 
-ParseTree_Node *ParseTree_Node_add_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr);
+ParseTree_Node *ParseTree_Node_create_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr);
+
+ParseTree_Node *ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr);
+
+ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
 int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
