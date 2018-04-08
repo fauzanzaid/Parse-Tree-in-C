@@ -40,6 +40,13 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr){
 
 	LinkedList_push(stack, node_ptr);
 
+	// Push all siblings on to stack
+	ParseTree_Node *sibling = node_ptr->sibling;
+	while(sibling){
+		LinkedList_push(stack, sibling);
+		sibling = sibling->sibling;
+	}
+
 	while( LinkedList_peek(stack) != NULL ){
 		ParseTree_Node *current = LinkedList_pop(stack);
 
@@ -124,12 +131,30 @@ ParseTree_Node *ParseTree_Node_create_child_left_end(ParseTree_Node *node_ptr, i
 	return new_node_ptr;
 }
 
-ParseTree_Node *ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr){
+void ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr){
 	child_ptr->parent = node_ptr;
 	child_ptr->sibling = node_ptr->child;
 	node_ptr->child = child_ptr;
+}
 
-	return child_ptr;
+void ParseTree_Node_attach_sibling(ParseTree_Node *node_ptr, ParseTree_Node *sibling_ptr){
+	ParseTree_Node *current = sibling_ptr;
+	if(node_ptr->parent != NULL){
+		while(current != NULL){
+			current->parent = node_ptr->parent;
+			current = current->sibling;
+		}
+	}
+
+	current = sibling_ptr;
+	if(node_ptr->sibling != NULL){
+		while(current->sibling != NULL){
+			current = current->sibling;
+		}
+		current->sibling = node_ptr->sibling;
+	}
+
+	node_ptr->sibling = sibling_ptr;
 }
 
 ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index){
@@ -166,6 +191,9 @@ int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int sy
 				node_ptr->child = child_cur->sibling;
 			else
 				child_prev->sibling = child_cur->sibling;
+
+			child_cur->parent = NULL;
+			child_cur->sibling = NULL;
 
 			ParseTree_Node_destroy(child_cur);
 			return 0;

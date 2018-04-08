@@ -73,7 +73,9 @@ ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_pt
 
 ParseTree_Node *ParseTree_Node_create_child_left_end(ParseTree_Node *node_ptr, int symbol, Token *tkn_ptr);
 
-ParseTree_Node *ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr);
+void ParseTree_Node_attach_child_left_end(ParseTree_Node *node_ptr, ParseTree_Node *child_ptr);
+
+void ParseTree_Node_attach_sibling(ParseTree_Node *node_ptr, ParseTree_Node *sibling_ptr);
 
 ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
