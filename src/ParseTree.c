@@ -178,7 +178,6 @@ ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node
 			child_cur->parent = NULL;
 			child_cur->sibling = NULL;
 
-			// printf("ParseTree_Node_detach_child_by_symbol_index : S par:%d\tidx:%d\n", node_ptr->symbol, symbol_index);
 			return child_cur;
 		}
 
@@ -186,7 +185,6 @@ ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node
 		child_cur = child_cur->sibling;
 	}
 
-	// printf("ParseTree_Node_detach_child_by_symbol_index : F par:%d\tidx:%d\n", node_ptr->symbol, symbol_index);
 	return NULL;
 }
 
@@ -205,7 +203,6 @@ int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int sy
 			child_cur->sibling = NULL;
 
 			ParseTree_Node_destroy(child_cur);
-			printf("ParseTree_Node_remove_child_by_symbol_index : S par:%d\tidx:%d\n", node_ptr->symbol, symbol_index);
 			return 0;
 		}
 
@@ -213,6 +210,5 @@ int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int sy
 		child_cur = child_cur->sibling;
 	}
 
-	printf("ParseTree_Node_remove_child_by_symbol_index : F par:%d\tidx:%d\n", node_ptr->symbol, symbol_index);
 	return -1;
 }
