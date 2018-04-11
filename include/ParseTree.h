@@ -64,6 +64,8 @@ void ParseTree_Node_destroy(ParseTree_Node *node_ptr);
 
 ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr);
 
+ParseTree_Node *ParseTree_Node_get_child_by_node_index(ParseTree_Node *node_ptr, int node_index);
+
 ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
 

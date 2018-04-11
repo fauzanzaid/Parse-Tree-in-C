@@ -104,6 +104,19 @@ ParseTree_Node *ParseTree_Node_move_preorder(ParseTree_Node *node_ptr){
 	}
 }
 
+ParseTree_Node *ParseTree_Node_get_child_by_node_index(ParseTree_Node *node_ptr, int node_index){
+	ParseTree_Node *child_cur = node_ptr->child;
+
+	while(node_index--){
+		child_cur = child_cur->sibling;
+
+		if(child_cur == NULL)
+			return NULL;
+	}
+
+	return child_cur;
+}
+
 ParseTree_Node *ParseTree_Node_get_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index){
 	ParseTree_Node *child_cur = node_ptr->child;
 
