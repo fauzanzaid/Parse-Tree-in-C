@@ -83,4 +83,12 @@ ParseTree_Node *ParseTree_Node_detach_child_by_symbol_index(ParseTree_Node *node
 
 int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int symbol_index);
 
+
+////////////
+// Others //
+////////////
+
+int ParseTree_get_node_count(ParseTree *tree_ptr);
+
+
 #endif

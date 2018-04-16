@@ -225,3 +225,23 @@ int ParseTree_Node_remove_child_by_symbol_index(ParseTree_Node *node_ptr, int sy
 
 	return -1;
 }
+
+
+////////////
+// Others //
+////////////
+
+int ParseTree_get_node_count(ParseTree *tree_ptr){
+	int node_count = 0;
+
+	while(1){
+		if(tree_ptr == NULL){
+			break;
+		}
+
+		node_count ++;
+		tree_ptr = ParseTree_Node_move_preorder(tree_ptr);
+	}
+
+	return node_count;
+}
